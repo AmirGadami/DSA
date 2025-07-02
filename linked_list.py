@@ -1,9 +1,38 @@
 class Node:
+    """
+    Represents a node in a singly linked list.
+
+    Attributes:
+        value (any): The data stored in the node.
+        next (Node): The reference to the next node in the list.
+    """
     def __init__(self, value):
         self.value = value
         self.next = None
 
+
 class LinkedList:
+    """
+    A singly linked list data structure.
+
+    Attributes:
+        head (Node): The first node in the list.
+        tail (Node): The last node in the list.
+        length (int): Number of nodes in the list.
+
+    Methods:
+        print_list(): Prints all node values.
+        make_empty(): Clears the list.
+        append(value): Adds node to the end.
+        pop(): Removes and returns the last node.
+        prepend(value): Adds node to the beginning.
+        pop_first(): Removes and returns the first node.
+        get(index): Returns node at a specific index.
+        set_value(index, value): Updates value of node at index.
+        insert(index, value): Inserts node at a given index.
+        remove(index): Removes node at index.
+        reverse(): Reverses the linked list in-place.
+    """
     def __init__(self, value):
         new_node = Node(value)
         self.head = new_node
@@ -11,20 +40,17 @@ class LinkedList:
         self.length = 1
 
     def print_list(self):
-        # Print all values in the linked list
         temp = self.head
         while temp is not None:
             print(temp.value)
             temp = temp.next
 
     def make_empty(self):
-        # Clear the entire list
         self.head = None
         self.tail = None
         self.length = 0
 
     def append(self, value):
-        # Add a node to the end
         new_node = Node(value)
         if self.length < 1:
             self.head = new_node
@@ -36,7 +62,6 @@ class LinkedList:
         return True
 
     def pop(self):
-        # Remove and return the last node
         if self.length == 0:
             return None
         temp = self.head
@@ -53,7 +78,6 @@ class LinkedList:
         return temp
 
     def prepend(self, value):
-        # Add node to the beginning
         new_node = Node(value)
         if self.length == 0:
             self.head = new_node
@@ -65,7 +89,6 @@ class LinkedList:
         return True
 
     def pop_first(self):
-        # Remove and return the first node
         if self.length == 0:
             return None
         temp = self.head
@@ -77,7 +100,6 @@ class LinkedList:
         return temp
 
     def get(self, index):
-        # Get node at a specific index
         if index < 0 or index >= self.length:
             return None
         temp = self.head
@@ -86,14 +108,12 @@ class LinkedList:
         return temp
 
     def set_value(self, index, value):
-        # Set the value of a node at a given index
         temp = self.get(index)
         if temp:
             temp.value = value
         return temp
 
     def insert(self, index, value):
-        # Insert node at a specific index
         if index < 0 or index > self.length:
             return False
         if index == 0:
@@ -108,7 +128,6 @@ class LinkedList:
         return True
 
     def remove(self, index):
-        # Remove and return node at a specific index
         if index < 0 or index >= self.length:
             return None
         if index == 0:
@@ -123,7 +142,8 @@ class LinkedList:
         return temp
 
     def reverse(self):
-        # Reverse the linked list in-place
+        if self.length <= 1:
+            return
         temp = self.head
         self.head = self.tail
         self.tail = temp

@@ -1,10 +1,39 @@
 class Node:
+    """
+    Represents a node in a doubly linked list.
+
+    Attributes:
+        value (any): The data stored in the node.
+        next (Node): Reference to the next node in the list.
+        prev (Node): Reference to the previous node in the list.
+    """
+
     def __init__(self, value):
-        self.value = value          # Stores the value of the node
-        self.next = None            # Pointer to the next node
-        self.prev = None            # Pointer to the previous node
+        self.value = value   # Data held by the node
+        self.next = None     # Pointer to the next node
+        self.prev = None     # Pointer to the previous node
 
 class DoublyLinkedList:
+    """
+    A doubly linked list implementation.
+
+    Attributes:
+        head (Node): The first node in the list.
+        tail (Node): The last node in the list.
+        length (int): Number of nodes in the list.
+
+    Methods:
+        print_list(): Prints all node values from head to tail.
+        append(value): Adds a node to the end of the list.
+        pop(): Removes and returns the last node.
+        prepend(value): Adds a node to the beginning of the list.
+        pop_first(): Removes and returns the first node.
+        get(index): Returns the node at a given index.
+        set_value(index, value): Updates the value of a node.
+        insert(index, value): Inserts a node at the specified index.
+        remove(index): Removes a node at the specified index.
+    """
+
     def __init__(self, value):
         new_node = Node(value)
         self.head = new_node        # First node in the list
@@ -74,6 +103,22 @@ class DoublyLinkedList:
         self.length -= 1
         return temp
 
+    def get(self, index):
+        # Return the node at a given index
+        if index < 0 or index >= self.length:
+            return None
+
+        if index < self.length // 2:
+            temp = self.head
+            for _ in range(index):
+                temp = temp.next
+        else:
+            temp = self.tail
+            for _ in range(self.length - 1, index, -1):
+                temp = temp.prev
+
+        return temp
+
     def set_value(self, index, value):
         # Set the value of the node at the given index
         temp = self.get(index)
@@ -113,12 +158,11 @@ class DoublyLinkedList:
             return self.pop()
 
         temp = self.get(index)
-        if temp:
-            before = temp.prev
-            after = temp.next
-            before.next = after
-            after.prev = before
-            temp.next = None
-            temp.prev = None
-            self.length -= 1
-            return temp
+        before = temp.prev
+        after = temp.next
+        before.next = after
+        after.prev = before
+        temp.next = None
+        temp.prev = None
+        self.length -= 1
+        return temp
