@@ -26,8 +26,8 @@ This repository contains clean, beginner-friendly implementations of core **data
 Just clone the repo and run any file:
 
 ```bash
-git clone https://github.com/your-username/data-structures-and-algorithms.git
-cd data-structures-and-algorithms
+git clone https://github.com/AmirGadami/DSA.git
+cd DSA
 python trees.py  # or any other file
 ```
 
